@@ -40,7 +40,7 @@ async def media_watch(id):
     file_data=await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
     file_name, mime_type = file_data.file_name, file_data.mime_type
     secure_hash = file_data.unique_id[:6]
-    src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
+    src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
     if tag == 'video':
         async with aiofiles.open('Adarsh/template/req.html') as r:
@@ -61,8 +61,7 @@ async def batch_page(message_id):
     for message_id in message_ids:
         file_data=await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(message_id))
         secure_hash = file_data.unique_id[:6]
-        msg_id = f"{message_id}/"
-        link = f"{Var.URL}watch/{msg_id}?hash={secure_hash}"
+        link = f"{Var.URL}watch/{message_id}"
         file_name = re.sub(r'[-_.]', ' ', file_data.file_name).title()
         links_with_names.append((file_name, link))
 
@@ -75,3 +74,9 @@ async def batch_page(message_id):
     html_code = template.replace('{links_placeholder}', buttons_html)
     
     return html_code
+
+
+    
+    
+    
+    
