@@ -1,4 +1,4 @@
-# (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
+# (c) github - @IllegalDeveloper
 from Adarsh.vars import Var
 from Adarsh.bot import StreamBot
 from Adarsh.utils.human_readable import humanbytes
