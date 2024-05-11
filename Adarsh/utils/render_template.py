@@ -82,8 +82,8 @@ async def batch_page(message_id):
 
     buttons_html = ''
     for file_name, link in links_with_names:
-        buttons_html += f'<form action="{link}" method="get"><button style="font-size: 20px; background-color: skyblue; border-radius: 10px;" class="button" type="submit">{file_name}</button></form>\n<br><p>&nbsp</p>'
-    html_code = template.replace('{links_placeholder}', buttons_html)
+        buttons_html += f'<form action="{link}" method="get"><button style="font-size: 20px; background-color: transparent; border-radius: 10px;" class="button" type="submit">{file_name}</button></form>\n<br><p>&nbsp</p>'
+     html_code = template.replace('{links_placeholder}', buttons_html)
     
     return html_code
 
