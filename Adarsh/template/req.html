@@ -224,10 +224,34 @@
 				<br>
                 <!----Button----->
 
-<div class="wrap" style="height: 100%; display: flex; align-items: center; justify-content: center;">
-  <button class="button" style="min-width: 300px; min-height: 60px; font-family: 'Nunito', sans-serif; font-size: 22px; text-transform: uppercase; letter-spacing: 1.3px; font-weight: 700; color: #313133; background: #4FD1C5; background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%); border: none; border-radius: 1000px; box-shadow: 12px 12px 24px rgba(79,209,197,.64); transition: all 0.3s ease-in-out 0s; cursor: pointer; outline: none; position: relative; padding: 10px;">
-    Submit
-  </button>
+<div style="margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5;">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <button onclick="showPopup()" style="padding: 20px 40px; background-color: #00FFCB; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 20px; transition: all 0.3s ease; display: inline-block; margin: 0 20px;">𝙾𝙿𝙴𝙽</button>
+  </div>
+
+  <div id="myPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f9f9f9; padding: 20px; border: 1px solid #ccc; z-index: 2; width: 80%; max-width: 600px;">
+    <h2 style="text-align: center; margin-bottom: 20px;">𝙸𝚃 𝙷𝙰𝚅𝙴 𝟹 𝚂𝙴𝚁𝚅𝙴𝚁 𝙱𝚄𝚃 𝙾𝙽𝙴 𝙸𝚂 𝚆𝙾𝚁𝙺𝙸𝙽𝙶...</h2>
+    <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐃𝐈𝐑𝐄𝐂𝐓 𝐅𝐀𝐒𝐓 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃</div>
+      <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank');" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 1</button>
+      <button class="url-button" onclick="window.open('https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207', '_blank');" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 2</button>
+      <button class="url-button" onclick="lazyDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 3</button>
+    </div>
+   
+    <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐆𝐄𝐓 𝐓𝐄𝐋𝐄𝐆𝐑𝐀𝐌 𝐅𝐈𝐋𝐄</div>
+      <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank');" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 1</button>
+      <button class="url-button" onclick="window.open('https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207', '_blank');" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 2</button>
+      <button class="url-button" onclick="RishiDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 3</button>
+    </div>
+  </div>
+
+  <script>
+  function showPopup() {
+    var popup = document.getElementById("myPopup");
+    popup.style.display = "block";
+  }
+  </script>
 </div>
 
 					
