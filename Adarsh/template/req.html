@@ -56,7 +56,7 @@
     <script>(function(d,z,s){s.src='https://'+d+'/401/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('aistekso.net',7389516,document.createElement('script'))</script>	
 </head>
 
-<body class="bg-black" style="margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #000;">        
+<body class="bg-black"
     <header>
              <nav class="navbar p-lg-4 p-2" style="background-color: rgb(31, 57, 106);">
                <div class="d-flex ">
@@ -239,47 +239,13 @@
 				<br>
                 <!----Button----->
 
-<div style="text-align: center; margin-bottom: 20px;">
-    <button onclick="showPopup()" style="padding: 20px 40px; background-color: #00FFCB; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 20px; transition: all 0.3s ease; display: inline-block; margin: 0 20px; position: relative;">
+<body class="bg-black" style="margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #000;">
+  <div style="text-align: center; margin-bottom: 20px;">
+    <button style="padding: 20px 40px; background-color: #00FFCB; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 20px; transition: all 0.3s ease; display: inline-block; margin: 0 20px; position: relative;">
       Submit
       <span style="content: ''; width: 30px; height: 30px; border-radius: 100%; border: 6px solid #00FFCB; position: absolute; z-index: -1; top: 50%; left: 50%; transform: translate(-50%, -50%); animation: ring 1.5s infinite;"></span>
     </button>
   </div>
-
-  <div id="myPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f9f9f9; padding: 20px; border: 1px solid #ccc; z-index: 2; width: 80%; max-width: 600px;">
-    <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
-      <h2 style="text-align: center; margin-bottom: 20px;">Main Heading for Group 1</h2>
-      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Group 1</div>
-      <button onclick="openUrl('https://example.com/1')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 1</button>
-      <button onclick="openUrl('https://example.com/2')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 2</button>
-      <button onclick="openUrl('https://example.com/3')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 3</button>
-    </div>
-    <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
-      <h2 style="text-align: center; margin-bottom: 20px;">Main Heading for Group 2</h2>
-      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">Group 2</div>
-      <button onclick="openUrl('https://example.com/4')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 4</button>
-      <button onclick="openUrl('https://example.com/5')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 5</button>
-      <button onclick="openUrl('https://example.com/6')" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">URL 6</button>
-    </div>
-  </div>
-
-  <script>
-    function showPopup() {
-      var popup = document.getElementById("myPopup");
-      popup.style.display = "block";
-    }
-
-    function closePopup() {
-      var popup = document.getElementById("myPopup");
-      popup.style.display = "none";
-    }
-
-    function openUrl(url) {
-      window.open(url, '_blank');
-      closePopup();
-    }
-  </script>
-
 					
                             
 <br>
