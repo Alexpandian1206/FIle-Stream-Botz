@@ -224,41 +224,50 @@
 				<br>
                 <!----Button----->
 
-<div style="margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; background-color: #f5f5f5;">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <button onclick="showNewPopup()" style="padding: 20px 40px; background-color: #00FFCB; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 20px; transition: all 0.3s ease; display: inline-block; margin: 0 20px;">𝙾𝙿𝙴𝙽</button>
-  </div>
 
-  <div id="myNewPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f9f9f9; padding: 20px; border: 1px solid #ccc; z-index: 2; width: 80%; max-width: 600px;">
-    <h2 style="text-align: center; margin-bottom: 20px;">𝙸𝚃 𝙷𝙰𝚅𝙴 𝟹 𝚂𝙴𝚁𝚅𝙴𝚁 𝙱𝚄𝚃 𝙾𝙽𝙴 𝙸𝚂 𝚆𝙾𝚁𝙺𝙸𝙽𝙶...</h2>
-    <div class="new-group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
-      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐍𝐄𝐖 𝐒𝐄𝐑𝐕𝐄𝐑 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃</div>
-      <button class="new-url-button" onclick="openNewServer1()" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟏</button>
-      <button class="new-url-button" onclick="openNewServer2()" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟐</button>
-      <button class="new-url-button" onclick="newDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟑</button>
-    </div>
-   
-    <div class="new-group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
-      <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐍𝐄𝐖 𝐓𝐄𝐋𝐄𝐆𝐑𝐀𝐌 𝐅𝐈𝐋𝐄</div>
-      <button class="new-url-button" onclick="openNewServer1()" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟏</button>
-      <button class="new-url-button" onclick="openNewServer2()" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟐</button>
-      <button class="new-url-button" onclick="newDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">𝐒𝐞𝐫𝐯𝐞𝐫 𝟑</button>
-    </div>
-  </div>
-
-  <script>
-  function showNewPopup() {
-    var popup = document.getElementById("myNewPopup");
-    popup.style.display = "block";
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
   }
+</style>
 
-  function closeNewPopup() {
-    var popup = document.getElementById("myNewPopup");
-    popup.style.display = "none";
-  }
-  </script>
+<button onclick="showPopup()" style="padding: 20px 40px; background-color: #00FFCB; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 20px; transition: all 0.3s ease; display: inline-block; margin: 0 20px;">𝙾𝙿𝙴𝙽</button>
+
+<div id="myPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #f9f9f9; padding: 20px; border: 1px solid #ccc; z-index: 2; width: 80%; max-width: 600px;">
+  <h2 style="text-align: center; margin-bottom: 20px;">𝙸𝚃 𝙷𝙰𝚅𝙴 𝟹 𝚂𝙴𝚁𝚅𝙴𝚁 𝙱𝚄𝚃 𝙾𝙽𝙴 𝙸𝚂 𝚆𝙾𝚁𝙺𝙸𝙽𝙶...</h2>
+  <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+    <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐃𝐈𝐑𝐄𝐂𝐓 𝐅𝐀𝐒𝐓 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃</div>
+    <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 1</button>
+    <button class="url-button" onclick="window.open('https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 2</button>
+    <button class="url-button" onclick="lazyDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  3</button>
+  </div>
+ 
+  <div class="group" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+    <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐆𝐄𝐓 𝐓𝐄𝐋𝐄𝐆𝐑𝐀𝐌 𝐅𝐈𝐋𝐄</div>
+    <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  1</button>
+    <button class="url-button" onclick="window.open('https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  2</button>
+    <button class="url-button" onclick="RishiDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  3</button>
+  </div>
 </div>
 
+<script>
+function showPopup() {
+  var popup = document.getElementById("myPopup");
+  popup.style.display = "block";
+}
+
+function closePopup() {
+  var popup = document.getElementById("myPopup");
+  popup.style.display = "none";
+}
+</script>
 
 					
                             
