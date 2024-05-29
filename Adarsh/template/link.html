@@ -33,9 +33,49 @@
     </style>
 
 </head>
-<body>
+<body class="bg-black">
   <header>
     
+     <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐃𝐈𝐑𝐄𝐂𝐓 𝐅𝐀𝐒𝐓 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃</div>
+        <center>
+        <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 1</button>
+     <br>     
+    <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 2</button>
+        <br>
+       <button class="url-button" onclick="lazyDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  3</button>
+          </center>
+    <div style="font-weight: bold; margin-bottom: 10px; text-align: center;">➢ 𝐆𝐄𝐓 𝐓𝐄𝐋𝐄𝐆𝐑𝐀𝐌 𝐅𝐈𝐋𝐄</div>
+
+        <center>
+
+        <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 1</button>
+
+     <br>     
+
+    <button class="url-button" onclick="window.open('https://vaikijie.net/4/7536317', '_blank'); closePopup();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ 2</button>
+
+        <br>
+
+       <button class="url-button" onclick="lazyDownload();" style="padding: 10px 20px; background-color: #FF1493; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background-color 0.3s ease; margin: 10px 0;">sᴇʀᴠᴇʀ  3</button>
   </header>
+  <script>
+        const videolink = window.location.href;
+        const  lazyLink = videolink.replace("/watch/", "/");
+        const numberRegex = /\/watch\/(\d+)\//; // Regular expression to match the number after "/watch/"
+        const match = videolink.match(numberRegex);
+        const number = match ? match[1] : '';
+        const Rishi = `https://telegram.me/{secondbot}?start=file_{file_id}`;
+        
+        function RishiDownload() {
+            const opentelegram = Rishi;
+            window.location.href = opentelegram;
+	}
+
+        function lazyDownload() {
+            const openLazyLink = lazyLink;
+            window.location.href = openLazyLink;
+        }
+
+    </script>
 </body>
 </html>
