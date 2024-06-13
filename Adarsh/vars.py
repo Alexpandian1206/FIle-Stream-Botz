@@ -44,6 +44,6 @@ class Var(object):
     DB_NAME = str(getenv("DB_NAME", "filesharebot"))
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_123_bot"))
     BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1001646631957'))
-    ADS_LINK_1 = "https://t.me/Illegal_Developer"
-    ADS_LINK_2 = "https://t.me/kseriesfilm"
+    ADS_LINK_1 = "https://glorganoth.com/4/7536317"
+    ADS_LINK_2 = "https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207"
     CUSTOM_FILE_CAPTION = getenv("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
