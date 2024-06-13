@@ -14,23 +14,32 @@ import re
 import random
 
 async def render_page(id, secure_hash):
+    # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
+
+    # Validate the hash
     if file_data.unique_id[:6] != secure_hash:
-        logging.debug(f'link hash: {secure_hash} - {file_data.unique_id[:6]}')
-        logging.debug(f"Invalid hash for message with - ID {id}")
+        logging.debug(f'Link hash: {secure_hash} - {file_data.unique_id[:6]}')
+        logging.debug(f"Invalid hash for message with ID {id}")
         raise InvalidHash
+
+    # Construct source URL and file tag
     src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
 
-    # Button links
+    # Original button links
     links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
     links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
-    
 
+    # Randomize button links
+    links1 = random.sample(links1, len(links1))
+    links2 = random.sample(links2, len(links2))
+
+    # Read and format HTML template
     async with aiofiles.open('Adarsh/template/req.html') as r:
         heading = 'Watch {}'.format(file_data.file_name)
         html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src)
-        
+
     # Add primary button with CSS and modal
     primary_button_html = f'''
     <style>
@@ -132,28 +141,32 @@ async def render_page(id, secure_hash):
     </div>
     '''
 
+    # Insert primary button HTML into the template
     html = html.replace('{new_button}', primary_button_html)
     return html
 
-# (c) github - @Rishikesh-Sharma09 ,telegram - https://telegram.me/Rk_botz
 async def media_watch(id):
+    # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
     file_name, mime_type = file_data.file_name, file_data.mime_type
     secure_hash = file_data.unique_id[:6]
     src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
 
-    # Button links
+    # Original button links
     links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
     links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
-    
 
-    
+    # Randomize button links
+    links1 = random.sample(links1, len(links1))
+    links2 = random.sample(links2, len(links2))
+
     if tag == 'video':
+        # Read and format HTML template
         async with aiofiles.open('Adarsh/template/req.html') as r:
             heading = 'Watch - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
-            
+
             # Add primary button with CSS and modal
             primary_button_html = f'''
             <style>
@@ -192,6 +205,11 @@ async def media_watch(id):
                     width: 80%;
                     border-radius: 20px;
                     position: relative;
+                }}
+                .modal-content h1 {{
+                    text-align: center;
+                    color: #333;
+                    font-weight: bold;
                 }}
                 .close {{
                     color: #aaa;
@@ -250,16 +268,20 @@ async def media_watch(id):
             </div>
             '''
 
+            # Insert primary button HTML into the template
             html = html.replace('{new_button}', primary_button_html)    
     else:
-        html = '<h1>This is not streamable file</h1>'
+        html = '<h1>This is not a streamable file</h1>'
+    
     return html
 
-## (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
+# (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
 async def batch_page(message_id):
+    # Get message with list of IDs
     GetMessage = await StreamBot.get_messages(chat_id=Var.BATCH_CHANNEL, message_ids=message_id)
     message_ids = GetMessage.text.split(" ")
-    print(f"message ids : {message_ids}")
+    print(f"Message IDs: {message_ids}")
+
     links_with_names = []
     for message_id in message_ids:
         file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(message_id))
@@ -268,12 +290,20 @@ async def batch_page(message_id):
         file_name = re.sub(r'[-_.]', ' ', file_data.file_name).title()
         links_with_names.append((file_name, link))
 
+    # Read and format batch HTML template
     async with aiofiles.open('Adarsh/template/batch.html') as r:
         template = await r.read()
 
     buttons_html = ''
     for file_name, link in links_with_names:
-        buttons_html += f'<form action="{link}" method="get" style="text-align: center;"><button class="button" type="submit" style="text-align: center;"><div class="file-name" style="text-align: center;"><p id="myDiv" style="text-align: center;"><h4 style="color:red; text-align: center;">ғɪʟᴇ ɴᴀᴍᴇ :</h4><br> <span style="color:white; text-align: center;">{file_name}</span></p></div></button></form><br><p>&nbsp;</p>'
-        html_code = template.replace('{links_placeholder}', buttons_html)
+        buttons_html += f'<form action="{link}" method="get" style="text-align: center;">' \
+                        f'<button class="button" type="submit" style="text-align: center;">' \
+                        f'<div class="file-name" style="text-align: center;">' \
+                        f'<p id="myDiv" style="text-align: center;">' \
+                        f'<h4 style="color:red; text-align: center;">File Name:</h4><br> ' \
+                        f'<span style="color:white; text-align: center;">{file_name}</span></p></div></button></form>' \
+                        f'<br><p>&nbsp;</p>'
 
-    return html_code    
+    html_code = template.replace('{links_placeholder}', buttons_html)
+
+    return html_code
