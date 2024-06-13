@@ -1,5 +1,5 @@
 
-# (c) adarsh-goel
+# (c) illegal_developer
 import os
 from os import getenv, environ
 from dotenv import load_dotenv
@@ -44,3 +44,4 @@ class Var(object):
     DB_NAME = str(getenv("DB_NAME", "filesharebot"))
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_123_bot"))
     BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1001646631957'))
+    ADS_LINK = "https://t.me/Illegal_Developer"
