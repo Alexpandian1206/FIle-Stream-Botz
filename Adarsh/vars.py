@@ -3,7 +3,7 @@
 import os
 from os import getenv, environ
 from dotenv import load_dotenv
-
+from Script import script
 
 
 load_dotenv()
@@ -44,5 +44,6 @@ class Var(object):
     DB_NAME = str(getenv("DB_NAME", "filesharebot"))
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_123_bot"))
     BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1001646631957'))
-    ADS_LINK = "https://t.me/Illegal_Developer"
-    ADS_LINKS = "https://t.me/KSeriesFilm"
+    ADS_LINK_1 = "https://t.me/Illegal_Developer"
+    ADS_LINK_2 = "https://t.me/kseriesfilm"
+    CUSTOM_FILE_CAPTION = getenv("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
