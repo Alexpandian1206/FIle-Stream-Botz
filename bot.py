@@ -47,7 +47,7 @@ async def start_command(client, message):
         size=get_size(file.file_size)
         f_caption = f"<code>{title}</code>"
         f_caption=Var.CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
-        await msg.edit_caption(f_caption)
+        await Rishi.edit_caption(f_caption)
         return
         
 @app.on_message(filters.command("users"))
