@@ -10,6 +10,17 @@ BOT_TOKEN = Var.FILE_BOT_TOKEN
 
 app = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
+def get_size(size):
+    """Get size in readable format"""
+
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
+    size = float(size)
+    i = 0
+    while size >= 1024.0 and i < len(units):
+        i += 1
+        size /= 1024.0
+    return "%.2f %s" % (size, units[i])
+    
 async def is_admin(user):    
     return user.id in Var.OWNER_ID
     
@@ -29,9 +40,16 @@ async def start_command(client, message):
 
     if msg.startswith("file"):
         _, file_id = msg.split("_", 1)
-        return await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id), protect_content=True)
-
-
+        Rishi = await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id), protect_content=True)
+        filetype = Rishi.media
+        file = getattr(Rishi, filetype.value)
+        title = file.file_name
+        size=get_size(file.file_size)
+        f_caption = f"<code>{title}</code>"
+        f_caption=Var.CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
+        await msg.edit_caption(f_caption)
+        return
+        
 @app.on_message(filters.command("users"))
 async def get_users(client, message):
     user = message.from_user
