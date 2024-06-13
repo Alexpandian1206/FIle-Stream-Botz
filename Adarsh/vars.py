@@ -45,3 +45,4 @@ class Var(object):
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_123_bot"))
     BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1001646631957'))
     ADS_LINK = "https://t.me/Illegal_Developer"
+    ADS_LINKS = "https://t.me/KSeriesFilm"
