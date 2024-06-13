@@ -7,5 +7,6 @@ dnspython
 apscheduler
 requests
 psutil
-pyromod
+git+https://github.com/KurimuzonAkuma/pyrogram
 colorama
+pyromod
