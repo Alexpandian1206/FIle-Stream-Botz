@@ -25,8 +25,10 @@ async def render_page(id, secure_hash):
     # Button links
     links1 = [f'{src}', f'{Var.ADS_LINK}']
     links2 = [f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}', f'{Var.ADS_LINK}']
+    links3 = [f'{src}', f'{Var.ADS_LINKS}']
     random.shuffle(links1)
     random.shuffle(links2)
+    random.shuffle(links3)
 
     async with aiofiles.open('Adarsh/template/req.html') as r:
         heading = 'Watch {}'.format(file_data.file_name)
@@ -147,8 +149,10 @@ async def media_watch(id):
     # Button links
     links1 = [f'{src}', f'{Var.ADS_LINK}']
     links2 = [f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}', f'{Var.ADS_LINK}']
+    links3 = [f'{src}', f'{Var.ADS_LINKS}']
     random.shuffle(links1)
     random.shuffle(links2)
+    random.shuffle(links3)
 
     
     if tag == 'video':
