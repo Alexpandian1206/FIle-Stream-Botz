@@ -1,10 +1,10 @@
 class script(object):
     CAPTION = """
-File Name: <blockquote> {filename} </blockquote>
-
-💾 Sɪᴢᴇ: {filesize}
+<b>══════════════════
+📁 𝑭𝒊𝒍𝒆 𝑵𝒂𝒎𝒆 : {filename} \n═══════════════════\n
+🔘 𝑭𝒊𝒍𝒆 𝑺𝒊𝒛𝒆 : {file_size}
 
 ╔═════ ᴊᴏɪɴ ᴡɪᴛʜ ᴜs ════╗
 💥 𝙅𝙊𝙄𝙉 :- <a href='https://t.me/Aklinksz'>AKLINKSZ</a>
 💥 𝙅𝙊𝙄𝙉 :- <a href='https://t.me/Aklinksz'>AKLINKSZ</a>
-╚═════ ᴊᴏɪɴ ᴡɪᴛʜ ᴜs ════╝"""
+╚═════ ᴊᴏɪɴ ᴡɪᴛʜ ᴜs ════╝</b>"""
