@@ -29,7 +29,7 @@ async def start_command(client, message):
 
     if msg.startswith("file"):
         _, file_id = msg.split("_", 1)
-        return await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id))
+        return await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id), protect_content=True)
 
 
 @app.on_message(filters.command("users"))
