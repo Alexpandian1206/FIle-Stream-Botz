@@ -23,10 +23,9 @@ async def render_page(id, secure_hash):
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Button links
-    links1 = [f'{Var.ADS_LINK_1}', f'{src}']
-    links2 = [f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
-    random.shuffle(links1)
-    random.shuffle(links2)
+    links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
+    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
+    
 
     async with aiofiles.open('Adarsh/template/req.html') as r:
         heading = 'Watch {}'.format(file_data.file_name)
@@ -121,13 +120,13 @@ async def render_page(id, secure_hash):
             <div class="button-container">
                 <button onclick="window.location.href='{links1[0]}'">server 1</button>
                 <button onclick="window.location.href='{links1[1]}'">server 2</button>
-                <button onclick="window.location.href='{links1[random.randint(0, 1)]}'">server 3</button>
+                <button onclick="window.location.href='{links1[2]}'">server 3</button>
             </div>
             <h1>Get telegram file from here:</h1>
             <div class="button-container">
                 <button onclick="window.location.href='{links2[0]}'">Server 1</button>
                 <button onclick="window.location.href='{links2[1]}'">server 2</button>
-                <button onclick="window.location.href='{links2[random.randint(0, 1)]}'">Server 3</button>
+                <button onclick="window.location.href='{links2[2]}'">Server 3</button>
             </div>
         </div>
     </div>
@@ -136,7 +135,7 @@ async def render_page(id, secure_hash):
     html = html.replace('{new_button}', primary_button_html)
     return html
 
-
+# (c) github - @Rishikesh-Sharma09 ,telegram - https://telegram.me/Rk_botz
 async def media_watch(id):
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
     file_name, mime_type = file_data.file_name, file_data.mime_type
@@ -145,10 +144,9 @@ async def media_watch(id):
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Button links
-    links1 = [f'{Var.ADS_LINK_1}', f'{src}']
-    links2 = [f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
-    random.shuffle(links1)
-    random.shuffle(links2)
+    links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
+    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
+    
 
     
     if tag == 'video':
@@ -240,13 +238,13 @@ async def media_watch(id):
                     <div class="button-container">
                         <button onclick="window.location.href='{links1[0]}'">server 1</button>
                         <button onclick="window.location.href='{links1[1]}'">server 2</button>
-                        <button onclick="window.location.href='{links1[random.randint(0, 1)]}'">server 3</button>
+                        <button onclick="window.location.href='{links1[2]}'">server 3</button>
                     </div>
                     <h1>Get telegram file from here:</h1>
                     <div class="button-container">
                         <button onclick="window.location.href='{links2[0]}'">Server 1</button>
                         <button onclick="window.location.href='{links2[1]}'">server 2</button>
-                        <button onclick="window.location.href='{links2[random.randint(0, 1)]}'">Server 3</button>
+                        <button onclick="window.location.href='{links2[2]}'">Server 3</button>
                     </div>
                 </div>
             </div>
@@ -257,6 +255,7 @@ async def media_watch(id):
         html = '<h1>This is not streamable file</h1>'
     return html
 
+## (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
 async def batch_page(message_id):
     GetMessage = await StreamBot.get_messages(chat_id=Var.BATCH_CHANNEL, message_ids=message_id)
     message_ids = GetMessage.text.split(" ")
@@ -277,4 +276,4 @@ async def batch_page(message_id):
         buttons_html += f'<form action="{link}" method="get" style="text-align: center;"><button class="button" type="submit" style="text-align: center;"><div class="file-name" style="text-align: center;"><p id="myDiv" style="text-align: center;"><h4 style="color:red; text-align: center;">ғɪʟᴇ ɴᴀᴍᴇ :</h4><br> <span style="color:white; text-align: center;">{file_name}</span></p></div></button></form><br><p>&nbsp;</p>'
         html_code = template.replace('{links_placeholder}', buttons_html)
 
-    return html_code
+    return html_code    
