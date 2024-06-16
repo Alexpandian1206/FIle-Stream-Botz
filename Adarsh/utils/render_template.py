@@ -247,22 +247,22 @@ async def media_watch(id):
                 }}
             </style>
             <div class="primary-button" onclick="document.getElementById('myModal').style.display='block'">
-                🚀 Download Or Get Telegram File 🚀
+                ꧁☆𝐎 𝐏 𝐄 𝐍☆꧂
             </div>
             <div id="myModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                    <h1>Download from here:</h1>
-                    <div class="button-container">
-                        <button onclick="window.location.href='{links1[0]}'">server 1</button>
-                        <button onclick="window.location.href='{links1[1]}'">server 2</button>
-                        <button onclick="window.location.href='{links1[2]}'">server 3</button>
-                    </div>
-                    <h1>Get telegram file from here:</h1>
-                    <div class="button-container">
-                        <button onclick="window.location.href='{links2[0]}'">Server 1</button>
-                        <button onclick="window.location.href='{links2[1]}'">server 2</button>
-                        <button onclick="window.location.href='{links2[2]}'">Server 3</button>
+                    <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
+            <div class="button-container">
+                <button onclick="window.location.href='{links1[0]}'">sᴇʀᴠᴇʀ 1</button>
+                <button onclick="window.location.href='{links1[1]}'">sᴇʀᴠᴇʀ 2</button>
+                <button onclick="window.location.href='{links1[2]}'">sᴇʀᴠᴇʀ 3</button>
+            </div>
+            <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙸𝙻𝙴 👇🏻</h1>
+            <div class="button-container">
+                <button onclick="window.location.href='{links2[0]}'">sᴇʀᴠᴇʀ 1</button>
+                <button onclick="window.location.href='{links2[1]}'">sᴇʀᴠᴇʀ 2</button>
+                <button onclick="window.location.href='{links2[2]}'">sᴇʀᴠᴇʀ 3</button>
                     </div>
                 </div>
             </div>
