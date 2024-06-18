@@ -45,5 +45,5 @@ class Var(object):
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_123_bot"))
     BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1001646631957'))
     ADS_LINK_1 = "https://glorganoth.com/4/7536317"
-    ADS_LINK_2 = "https://welltodo-type.com/b.3nVc0/PR3RpFvKbTmZVtJgZiD_0I1VM/zCks1ANOTfYN2TLfTrUOzkOaTwUZ1/NgjEcQ"
+    ADS_LINK_2 = "https://wwpa.hvldks.com/redirect-zone/8e0d4ebe"
     CUSTOM_FILE_CAPTION = getenv("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
