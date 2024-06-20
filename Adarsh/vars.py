@@ -17,7 +17,7 @@ class Var(object):
     name = str(getenv('name', 'filetolinkbot'))
     SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '60'))
     WORKERS = int(getenv('WORKERS', '4'))
-    BIN_CHANNEL = int(getenv('BIN_CHANNEL',''))
+    BIN_CHANNEL = int(getenv('BIN_CHANNEL','-1002188496063'))
     PORT = int(getenv('PORT', 8080))
     BIND_ADRESS = str(getenv('WEB_SERVER_BIND_ADDRESS', '0.0.0.0'))
     PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
@@ -39,11 +39,11 @@ class Var(object):
         URL = "http://{}/".format(FQDN)
     DATABASE_URL = str(getenv('DATABASE_URL', 'mongodb+srv://Alex1206:Alex1206@cluster0.djjkmax.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'))
     UPDATES_CHANNEL = str(getenv('UPDATES_CHANNEL', None))
-    BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-1002150153821")).split())) 
+    BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "")).split())) 
     DB_URI = str(getenv('DB_URI', 'mongodb+srv://Alex1206:Alex1206@cluster0.wzjzq5b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'))
     DB_NAME = str(getenv("DB_NAME", "filesharebot"))
     SECOND_BOTUSERNAME = str(getenv("SECOND_BOTUSERNAME", "Files_306_bot"))
-    BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1002188496063'))
+    BATCH_CHANNEL = int(getenv('BATCH_CHANNEL','-1002150153821'))
     ADS_LINK_1 = "https://glorganoth.com/4/7536317"
     ADS_LINK_2 = "https://wwpa.hvldks.com/redirect-zone/8e0d4ebe"
     CUSTOM_FILE_CAPTION = getenv("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
