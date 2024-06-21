@@ -40,7 +40,7 @@ async def start_command(client, message):
 
     if msg.startswith("file"):
         _, file_id = msg.split("_", 1)
-        Rishi = await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id), protect_content=True)
+        Rishi = await client.copy_message(chat_id=message.from_user.id, from_chat_id=int(Var.BIN_CHANNEL), message_id=int(file_id), protect_content=False)
         filetype = Rishi.media
         file = getattr(Rishi, filetype.value)
         title = file.file_name
