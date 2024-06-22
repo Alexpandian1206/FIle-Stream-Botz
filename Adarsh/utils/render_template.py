@@ -120,7 +120,7 @@ async def render_page(id, secure_hash):
         }}
     </style>
     <div class="primary-button" onclick="document.getElementById('myModal').style.display='block'">
-        ꧁☆𝐎 𝐏 𝐄 𝐍☆꧂
+        OPEN - LINK
     </div>
     <div id="myModal" class="modal">
         <div class="modal-content">
@@ -247,7 +247,7 @@ async def media_watch(id):
                 }}
             </style>
             <div class="primary-button" onclick="document.getElementById('myModal').style.display='block'">
-                ꧁☆𝐎 𝐏 𝐄 𝐍☆꧂
+                OPEN - LINK
             </div>
             <div id="myModal" class="modal">
                 <div class="modal-content">
