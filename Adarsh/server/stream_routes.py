@@ -50,6 +50,7 @@ async def batch_links(request):
         
 @routes.get(r"/watch/{path:\S+}", allow_head=True)
 async def stream_handler(request: web.Request):
+    #url = http://example.com/watch/1234567890?hash=123456&channel=-1001234567890
     try:
         path = request.match_info["path"]
         match = re.search(r"^([a-zA-Z0-9_-]{6})(\d+)$", path)
@@ -59,7 +60,8 @@ async def stream_handler(request: web.Request):
         else:
             id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
             secure_hash = request.rel_url.query.get("hash")
-        return web.Response(text=await render_page(id, secure_hash), content_type='text/html')
+        channel = int(request.rel_url.query.get("channel", Var.BIN_CHANNEL))
+        return web.Response(text=await render_page(id, secure_hash, channel), content_type='text/html')
     except InvalidHash as e:
         path = request.match_info["path"]
         match = re.search(r"^([a-zA-Z0-9_-]{6})(\d+)$", path)
@@ -67,7 +69,7 @@ async def stream_handler(request: web.Request):
             id = int(match.group(2))
         else:
             id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
-        return web.Response(text=await media_watch(id), content_type='text/html')
+        return web.Response(text=await media_watch(id, channel=channel), content_type='text/html')
     except FIleNotFound as e:
         raise web.HTTPNotFound(text=e.message)
     except (AttributeError, BadStatusLine, ConnectionResetError):
@@ -87,7 +89,9 @@ async def stream_handler(request: web.Request):
         else:
             id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
             secure_hash = request.rel_url.query.get("hash")
-        return await media_streamer(request, id, secure_hash)
+
+        channel = int(request.rel_url.query.get("channel", Var.BIN_CHANNEL))
+        return await media_streamer(request, id, secure_hash, channel)
     except InvalidHash as e:
         path = request.match_info["path"]
         match = re.search(r"^([a-zA-Z0-9_-]{6})(\d+)$", path)
@@ -96,9 +100,10 @@ async def stream_handler(request: web.Request):
         else:
             id = int(re.search(r"(\d+)(?:\/\S+)?", path).group(1))
         try:
-            file_data=await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
+            channel = int(request.rel_url.query.get("channel", Var.BIN_CHANNEL))
+            file_data=await get_file_ids(StreamBot, channel, int(id))
             secure_hash = file_data.unique_id[:6]
-            return await media_streamer(request, id, secure_hash)
+            return await media_streamer(request, id, secure_hash, channel)
         except FIleNotFound as e:
             raise web.HTTPNotFound(text=e.message)
     except FIleNotFound as e:
@@ -111,7 +116,7 @@ async def stream_handler(request: web.Request):
 
 class_cache = {}
 
-async def media_streamer(request: web.Request, id: int, secure_hash: str):
+async def media_streamer(request: web.Request, id: int, secure_hash: str, channel: int) -> web.Response:
     range_header = request.headers.get("Range", 0)
     
     index = min(work_loads, key=work_loads.get)
@@ -128,7 +133,7 @@ async def media_streamer(request: web.Request, id: int, secure_hash: str):
         tg_connect = ByteStreamer(faster_client)
         class_cache[faster_client] = tg_connect
     logging.debug("before calling get_file_properties")
-    file_id = await tg_connect.get_file_properties(id)
+    file_id = await tg_connect.get_file_properties(id, channel)
     logging.debug("after calling get_file_properties")
     
     if file_id.unique_id[:6] != secure_hash:

@@ -13,9 +13,9 @@ import aiohttp
 import re
 import random
 
-async def render_page(id, secure_hash):
+async def render_page(id, secure_hash, channel):
     # Get file data based on ID
-    file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
+    file_data = await get_file_ids(StreamBot, int(channel), int(id))
 
     # Validate the hash
     if file_data.unique_id[:6] != secure_hash:
@@ -145,9 +145,9 @@ async def render_page(id, secure_hash):
     html = html.replace('{new_button}', primary_button_html)
     return html
 
-async def media_watch(id):
+async def media_watch(id, channel=Var.BIN_CHANNEL):
     # Get file data based on ID
-    file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
+    file_data = await get_file_ids(StreamBot, int(channel), int(id))
     file_name, mime_type = file_data.file_name, file_data.mime_type
     secure_hash = file_data.unique_id[:6]
     src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
