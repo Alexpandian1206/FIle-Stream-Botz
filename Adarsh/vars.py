@@ -23,7 +23,7 @@ class Var(object):
     PING_INTERVAL = int(environ.get("PING_INTERVAL", "1200"))  # 20 minutes
     OWNER_ID = set(int(x) for x in os.environ.get("OWNER_ID", "1254785184").split())  
     NO_PORT = bool(getenv('NO_PORT', False))
-    PROTECT_CONTENT = int(getenv('PROTECT_CONTENT','true'))
+    PROTECT_CONTENT = os.getenv('PROTECT_CONTENT','True'))
     APP_NAME = None
     OWNER_USERNAME = str(getenv('OWNER_USERNAME', 'therialex_1206'))
     if 'DYNO' in environ:
