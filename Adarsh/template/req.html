@@ -456,66 +456,49 @@
         </div>
     </footer>
     <!-------------- Video Player Code -------------->
-    <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" type="text/css">
-
-    <div class="fluid-player" id="my-video"></div>
-
-    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-    <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js"></script>
-
-    <script>
-        const controls = [
-            'play-large',
-            'rewind',
-            'play',
-            'fast-forward',
-            'progress',
-            'current-time',
-            'duration',
-            'mute',
-            'captions',
-            'settings',
-            'pip',
-            'airplay',
-            'fullscreen',
-            'chromecast'  // Add 'chromecast' control for Chromecast support
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const player = fluidPlayer('my-video', {
-                controls,
-                playbackRateControls: true, // Enable playback speed control
-                qualitySelector: {
-                    defaultQuality: 0, // Set the default video quality index
-                    options: [
-                        { label: '720p', src: 'URL_TO_720p_VIDEO' },
-                        { label: '480p', src: 'URL_TO_480p_VIDEO' },
-                        // Add more quality options as needed
-                    ],
-                },
-                preload: 'none' // Disable the download option
-            });
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const player = new Plyr('.player', {
+            controls: [
+                'play-large',
+                'rewind',
+                'play',
+                'fast-forward',
+                'progress',
+                'current-time',
+                'duration',
+                'mute',
+                'volume',
+                'captions',
+                'settings',
+                'pip',
+                'airplay',
+                'fullscreen',
+                'quality', // Add quality option
+                'chromecast' // Add Chromecast option
+            ],
+            quality: { // Quality options
+                default: 720,
+                options: [720, 1080, 2160] // Example quality options
+            },
+            chromecast: {} // Chromecast configuration
         });
+    });
+</script>
+<script src="js/wow.min.js"></script>
+<script>
+    new WOW().init();
+</script>
+<script>
+    // Truncate text in 'myDiv' if it's longer than 60 characters
+    var div = document.getElementById('myDiv');
+    var text = div.textContent;
 
-
-        const body = document.querySelector('body');
-        const footer = document.querySelector('footer');
-        const toogle = document.querySelector('.toogle');
-    </script>
-
-    <script src="js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-
-    <script>
-        var div = document.getElementById('myDiv');
-        var text = div.textContent;
-
-        if (text.length > 60) {
-            div.textContent = text.slice(0, 60) + "....";
-        }
-    </script>
+    if (text.length > 60) {
+        div.textContent = text.slice(0, 60) + "....";
+    }
+</script>
 
     <!-- Disabling right click -->
     <script>
