@@ -48,9 +48,5 @@ class Var(object):
     CUSTOM_FILE_CAPTION = getenv("CUSTOM_FILE_CAPTION", f"{script.CAPTION}")
 
 #ADS LINK
-    ADS_LINK_1 = "https://ougairgob.net/4/7697132" # Monetag 1
-    ADS_LINK_2 = "https://wwp.aistiw.com/redirect-zone/8e0d4ebe" # Adoperator
-    ADS_LINK_3 = "https://aniptoassad.com/4/7536317" # Monetag 2
-    ADS_LINK_4 = "https://chesssorrydescend.com/fw3c8adpy7?key=35efc096895e9dfac029bf15caa6b207" # Adstera
-    ADS_LINK_5 = "https://toathoule.com/4/7821485" # Monetag 3
- 
+    ADS_LINK_1 = "https://glorganoth.com/4/7536317"
+    ADS_LINK_2 = "https://glodretsa.net/4/7697132"
