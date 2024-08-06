@@ -30,6 +30,20 @@
       text-shadow: 2px 2px 2px black, 0 0 25px rgb(48, 146, 98), 0 0 5px darkgreen;
       font-family: serif;
       }
+	    
+        .button {
+            background-color: transparent; /* No background color */
+            border: 2px solid skyblue; /* Green border with a thickness of 2px */
+            padding: 12px 20px; /* Padding inside the button */
+            text-align: center; /* Center the text inside the button */
+            text-decoration: none; /* Remove any text decoration */
+            display: inline-block; /* Allow padding and margins while behaving like an inline element */
+            font-size: 16px; /* Font size of the text inside the button */
+            margin: 4px 2px; /* Margin around the button */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+    
     </style>
 
 </head>
@@ -142,12 +156,35 @@
                </div>
             </nav>
     </header>
-<body style="background-color: black;">
+<body style="background-color: black; text-align: center; font-family: 'Times New Roman', Times, serif;">
+	<h4 style="color:red;">SEARCH TO EASILY FIND MOVIES OR SERIES</h4>
     <div>
-        <ul style="color: black; font-family: 'Times New Roman', Times, serif;">
-    {links_placeholder}
-</ul>
-
+	    <br>
+        <input type="text" id="searchInput" onkeyup="filterList()" placeholder="Search For File Names.." style="color: black;">
+          <hr>
+	    <br>
+	    <ul id="fileList">
+            {links_placeholder}
+        </ul>
     </div>
+	<script>
+        function filterList() {
+            let input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            ul = document.getElementById('fileList');
+            li = ul.getElementsByTagName('li');
+
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("span")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+	</script>
 </body>
 </html>
