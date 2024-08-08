@@ -82,7 +82,8 @@ async def render_page(id, secure_hash):
             '''
 
             # Insert buttons HTML into the template
-            html = html.replace('{new_button}', buttons_html)
+            html = html.replace('{download_buttons}', download_buttons_html)
+            html = html.replace('{telegram_buttons}', telegram_buttons_html)
     else:
         html = '<h1>This is not a streamable file</h1>'
     
@@ -159,7 +160,8 @@ async def media_watch(id):
             '''
 
             # Insert buttons HTML into the template
-            html = html.replace('{new_button}', buttons_html)
+            html = html.replace('{download_buttons}', download_buttons_html)
+            html = html.replace('{telegram_buttons}', telegram_buttons_html)
     else:
         html = '<h1>This is not a streamable file</h1>'
     
