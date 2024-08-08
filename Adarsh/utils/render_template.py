@@ -46,7 +46,7 @@ async def render_page(id, secure_hash):
                 for i in range(len(links2))
             )
 
-            # Define the HTML for direct display
+            # Define the HTML for direct display with placeholders
             buttons_html = f'''
             <style>
                 .button-container {{
@@ -64,7 +64,7 @@ async def render_page(id, secure_hash):
                     border-radius: 20px;
                     cursor: pointer;
                     transition: all 0.3s;
-                    margin: 4px;
+                    margin: 4px 0;
                     width: 200px;
                 }}
                 .button-container button:hover {{
@@ -76,6 +76,8 @@ async def render_page(id, secure_hash):
             <div class="button-container">
                 <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
                 {download_buttons_html}
+            </div>
+            <div class="button-container">
                 <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
                 {telegram_buttons_html}
             </div>
@@ -88,8 +90,6 @@ async def render_page(id, secure_hash):
         html = '<h1>This is not a streamable file</h1>'
     
     return html
-
-    
 
 async def media_watch(id):
     # Get file data based on ID
@@ -124,7 +124,7 @@ async def media_watch(id):
                 for i in range(len(links2))
             )
 
-            # Define the HTML for direct display
+            # Define the HTML for direct display with placeholders
             buttons_html = f'''
             <style>
                 .button-container {{
@@ -142,7 +142,7 @@ async def media_watch(id):
                     border-radius: 20px;
                     cursor: pointer;
                     transition: all 0.3s;
-                    margin: 4px;
+                    margin: 4px 0;
                     width: 200px;
                 }}
                 .button-container button:hover {{
@@ -154,6 +154,8 @@ async def media_watch(id):
             <div class="button-container">
                 <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
                 {download_buttons_html}
+            </div>
+            <div class="button-container">
                 <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
                 {telegram_buttons_html}
             </div>
@@ -166,6 +168,7 @@ async def media_watch(id):
         html = '<h1>This is not a streamable file</h1>'
     
     return html
+
     
 
 # (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
