@@ -16,15 +16,9 @@ import random
 async def render_page(id, secure_hash):
     # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
-
-    # Validate the hash
-    if file_data.unique_id[:6] != secure_hash:
-        logging.debug(f'Link hash: {secure_hash} - {file_data.unique_id[:6]}')
-        logging.debug(f"Invalid hash for message with ID {id}")
-        raise InvalidHash
-
-    # Construct source URL and file tag
-    src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
+    file_name, mime_type = file_data.file_name, file_data.mime_type
+    secure_hash = file_data.unique_id[:6]
+    src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Original button links
@@ -35,115 +29,66 @@ async def render_page(id, secure_hash):
     links1 = random.sample(links1, len(links1))
     links2 = random.sample(links2, len(links2))
 
-    # Read and format HTML template
-    async with aiofiles.open('Adarsh/template/req.html') as r:
-        heading = 'Watch {}'.format(file_data.file_name)
-        html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src)
+    if tag == 'video':
+        # Read and format HTML template
+        async with aiofiles.open('Adarsh/template/req.html') as r:
+            heading = 'Watch - {}'.format(file_name)
+            html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
 
-    # Add primary button with CSS and modal
-    primary_button_html = f'''
-    <style>
-        .primary-button {{
-            background-color: #FFC107; /* Bootstrap warning color */
-            color: black;
-            font-weight: bold;
-            text-align: center;
-            padding: 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }}
-        .primary-button:hover {{
-            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }}
-        .modal {{
-            display: none; /* Hidden initially */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.4);
-        }}
-        .modal-content {{
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            border-radius: 20px;
-            position: relative;
-        }}
-        .modal-content h1 {{
-            text-align: center;
-            color: #333;
-            font-weight: bold;
-        }}
-        .close {{
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }}
-        .close:hover,
-        .close:focus {{
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }}
-        .button-container {{
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }}
-        .button-container button {{
-            background-color: #FFC107; /* Bootstrap warning color */
-            color: black;
-            font-weight: bold;
-            text-align: center;
-            padding: 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin: 4px;
-        }}
-        .button-container button:hover {{
-            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }}
-    </style>
-    <div class="primary-button" onclick="document.getElementById('myModal').style.display='block'">
-        OPEN - LINK
-    </div>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-            <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
-            <div class="button-container">
-                <button onclick="window.location.href='{links1[0]}'">sᴇʀᴠᴇʀ 1</button>
-                <button onclick="window.location.href='{links1[1]}'">sᴇʀᴠᴇʀ 2</button>
-                <button onclick="window.location.href='{links1[2]}'">sᴇʀᴠᴇʀ 3</button>
-            </div>
-            <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙸𝙻𝙴 👇🏻</h1>
-            <div class="button-container">
-                <button onclick="window.location.href='{links2[0]}'">sᴇʀᴠᴇʀ 1</button>
-                <button onclick="window.location.href='{links2[1]}'">sᴇʀᴠᴇʀ 2</button>
-                <button onclick="window.location.href='{links2[2]}'">sᴇʀᴠᴇʀ 3</button>
-            </div>
-        </div>
-    </div>
-    '''
+            # Define button HTML separately
+            download_buttons_html = ''.join(
+                f'<button onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                for i in range(len(links1))
+            )
 
-    # Insert primary button HTML into the template
-    html = html.replace('{new_button}', primary_button_html)
+            telegram_buttons_html = ''.join(
+                f'<button onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                for i in range(len(links2))
+            )
+
+            # Define the HTML for direct display
+            buttons_html = f'''
+            <style>
+                .button-container {{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 20px;
+                }}
+                .button-container button {{
+                    background-color: #FFC107; /* Bootstrap warning color */
+                    color: black;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 15px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    margin: 4px;
+                    width: 200px;
+                }}
+                .button-container button:hover {{
+                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transform: translateY(-5px);
+                }}
+            </style>
+            <div class="button-container">
+                <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
+                {download_buttons_html}
+                <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
+                {telegram_buttons_html}
+            </div>
+            '''
+
+            # Insert buttons HTML into the template
+            html = html.replace('{new_button}', buttons_html)
+    else:
+        html = '<h1>This is not a streamable file</h1>'
+    
     return html
+
+    
 
 async def media_watch(id):
     # Get file data based on ID
@@ -167,66 +112,24 @@ async def media_watch(id):
             heading = 'Watch - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
 
-            # Add primary button with CSS and modal
-            primary_button_html = f'''
+            # Define button HTML separately
+            download_buttons_html = ''.join(
+                f'<button onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                for i in range(len(links1))
+            )
+
+            telegram_buttons_html = ''.join(
+                f'<button onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                for i in range(len(links2))
+            )
+
+            # Define the HTML for direct display
+            buttons_html = f'''
             <style>
-                .primary-button {{
-                    background-color: #FFC107; /* Bootstrap warning color */
-                    color: black;
-                    font-weight: bold;
-                    text-align: center;
-                    padding: 15px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                }}
-                .primary-button:hover {{
-                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    transform: translateY(-5px);
-                }}
-                .modal {{
-                    display: none; /* Hidden initially */
-                    position: fixed;
-                    z-index: 1;
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: auto;
-                    background-color: rgb(0,0,0);
-                    background-color: rgba(0,0,0,0.4);
-                }}
-                .modal-content {{
-                    background-color: #fefefe;
-                    margin: 15% auto;
-                    padding: 20px;
-                    border: 1px solid #888;
-                    width: 80%;
-                    border-radius: 20px;
-                    position: relative;
-                }}
-                .modal-content h1 {{
-                    text-align: center;
-                    color: #333;
-                    font-weight: bold;
-                }}
-                .close {{
-                    color: #aaa;
-                    float: right;
-                    font-size: 28px;
-                    font-weight: bold;
-                }}
-                .close:hover,
-                .close:focus {{
-                    color: black;
-                    text-decoration: none;
-                    cursor: pointer;
-                }}
                 .button-container {{
                     display: flex;
-                    justify-content: center;
-                    flex-wrap: wrap;
+                    flex-direction: column;
+                    align-items: center;
                     margin-top: 20px;
                 }}
                 .button-container button {{
@@ -239,6 +142,7 @@ async def media_watch(id):
                     cursor: pointer;
                     transition: all 0.3s;
                     margin: 4px;
+                    width: 200px;
                 }}
                 .button-container button:hover {{
                     background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
@@ -246,34 +150,21 @@ async def media_watch(id):
                     transform: translateY(-5px);
                 }}
             </style>
-            <div class="primary-button" onclick="document.getElementById('myModal').style.display='block'">
-                OPEN - LINK
-            </div>
-            <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                    <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
             <div class="button-container">
-                <button onclick="window.location.href='{links1[0]}'">sᴇʀᴠᴇʀ 1</button>
-                <button onclick="window.location.href='{links1[1]}'">sᴇʀᴠᴇʀ 2</button>
-                <button onclick="window.location.href='{links1[2]}'">sᴇʀᴠᴇʀ 3</button>
-            </div>
-            <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙸𝙻𝙴 👇🏻</h1>
-            <div class="button-container">
-                <button onclick="window.location.href='{links2[0]}'">sᴇʀᴠᴇʀ 1</button>
-                <button onclick="window.location.href='{links2[1]}'">sᴇʀᴠᴇʀ 2</button>
-                <button onclick="window.location.href='{links2[2]}'">sᴇʀᴠᴇʀ 3</button>
-                    </div>
-                </div>
+                <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
+                {download_buttons_html}
+                <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
+                {telegram_buttons_html}
             </div>
             '''
 
-            # Insert primary button HTML into the template
-            html = html.replace('{new_button}', primary_button_html)    
+            # Insert buttons HTML into the template
+            html = html.replace('{new_button}', buttons_html)
     else:
         html = '<h1>This is not a streamable file</h1>'
     
     return html
+    
 
 # (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
 async def batch_page(message_id):
