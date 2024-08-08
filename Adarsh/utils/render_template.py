@@ -35,55 +35,18 @@ async def render_page(id, secure_hash):
             heading = 'Watch - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
 
-            # Define button HTML separately
+            # Create the buttons HTML
             download_buttons_html = ''.join(
-                f'<button onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links1))
             )
 
             telegram_buttons_html = ''.join(
-                f'<button onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links2))
             )
 
-            # Define the HTML for direct display with placeholders
-            buttons_html = f'''
-            <style>
-                .button-container {{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    margin-top: 20px;
-                }}
-                .button-container button {{
-                    background-color: #FFC107; /* Bootstrap warning color */
-                    color: black;
-                    font-weight: bold;
-                    text-align: center;
-                    padding: 15px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                    margin: 4px 0;
-                    width: 200px;
-                }}
-                .button-container button:hover {{
-                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    transform: translateY(-5px);
-                }}
-            </style>
-            <div class="button-container">
-                <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
-                {download_buttons_html}
-            </div>
-            <div class="button-container">
-                <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
-                {telegram_buttons_html}
-            </div>
-            '''
-
-            # Insert buttons HTML into the template
+            # Insert buttons HTML directly into the template
             html = html.replace('{download_buttons}', download_buttons_html)
             html = html.replace('{telegram_buttons}', telegram_buttons_html)
     else:
@@ -113,61 +76,25 @@ async def media_watch(id):
             heading = 'Watch - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
 
-            # Define button HTML separately
+            # Create the buttons HTML
             download_buttons_html = ''.join(
-                f'<button onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links1))
             )
 
             telegram_buttons_html = ''.join(
-                f'<button onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links2))
             )
 
-            # Define the HTML for direct display with placeholders
-            buttons_html = f'''
-            <style>
-                .button-container {{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    margin-top: 20px;
-                }}
-                .button-container button {{
-                    background-color: #FFC107; /* Bootstrap warning color */
-                    color: black;
-                    font-weight: bold;
-                    text-align: center;
-                    padding: 15px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                    margin: 4px 0;
-                    width: 200px;
-                }}
-                .button-container button:hover {{
-                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    transform: translateY(-5px);
-                }}
-            </style>
-            <div class="button-container">
-                <h1>👇🏻 𝙳𝙸𝚁𝙴𝙲𝚃 𝙳𝙾𝚆𝙽𝙻𝙾𝙰𝙳 𝙷𝙴𝚁𝙴👇🏻</h1>
-                {download_buttons_html}
-            </div>
-            <div class="button-container">
-                <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙄𝙇𝙴 👇🏻</h1>
-                {telegram_buttons_html}
-            </div>
-            '''
-
-            # Insert buttons HTML into the template
+            # Insert buttons HTML directly into the template
             html = html.replace('{download_buttons}', download_buttons_html)
             html = html.replace('{telegram_buttons}', telegram_buttons_html)
     else:
         html = '<h1>This is not a streamable file</h1>'
     
     return html
+
 
     
 
