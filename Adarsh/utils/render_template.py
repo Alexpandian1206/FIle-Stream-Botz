@@ -37,12 +37,12 @@ async def render_page(id, secure_hash):
 
             # Create the buttons HTML
             download_buttons_html = ''.join(
-                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links1))
             )
 
             telegram_buttons_html = ''.join(
-                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links2))
             )
 
@@ -53,6 +53,8 @@ async def render_page(id, secure_hash):
         html = '<h1>This is not a streamable file</h1>'
     
     return html
+
+
 
 async def media_watch(id):
     # Get file data based on ID
@@ -78,12 +80,12 @@ async def media_watch(id):
 
             # Create the buttons HTML
             download_buttons_html = ''.join(
-                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links1))
             )
 
             telegram_buttons_html = ''.join(
-                f'<button style="display: block; margin: 10px auto;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
+                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
                 for i in range(len(links2))
             )
 
@@ -94,9 +96,6 @@ async def media_watch(id):
         html = '<h1>This is not a streamable file</h1>'
     
     return html
-
-
-    
 
 # (c) github - @Rishikesh-Sharma09 ,telegram - @Rk_botz
 async def batch_page(message_id):
