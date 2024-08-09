@@ -22,11 +22,9 @@ async def render_page(id, secure_hash):
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Original button links
-    links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
     links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
 
     # Randomize button links
-    links1 = random.sample(links1, len(links1))
     links2 = random.sample(links2, len(links2))
 
     if tag == 'video':
@@ -35,24 +33,48 @@ async def render_page(id, secure_hash):
             heading = 'Watch - {}'.format(file_name)
             html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
 
-            # Create the buttons HTML
-            download_buttons_html = ''.join(
-                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
-                for i in range(len(links1))
-            )
+            # Define button HTML for Telegram file download
+            telegram_buttons_html = f'''
+            <style>
+                .button-container {{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 20px;
+                }}
+                .button-container button {{
+                    background-color: #FFC107; /* Bootstrap warning color */
+                    color: black;
+                    font-weight: bold;
+                    text-align: center;
+                    padding: 15px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    margin: 4px;
+                    width: 200px;
+                }}
+                .button-container button:hover {{
+                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                    transform: translateY(-5px);
+                }}
+            </style>
+            <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙸𝙇𝙴 👇🏻</h1>
+            <div class="button-container">
+                <button onclick="window.location.href='{links2[0]}'">sᴇʀᴠᴇʀ 1</button>
+                <button onclick="window.location.href='{links2[1]}'">sᴇʀᴠᴇʀ 2</button>
+                <button onclick="window.location.href='{links2[2]}'">sᴇʀᴠᴇʀ 3</button>
+            </div>
+            '''
 
-            telegram_buttons_html = ''.join(
-                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
-                for i in range(len(links2))
-            )
-
-            # Insert buttons HTML directly into the template
-            html = html.replace('{download_buttons}', download_buttons_html)
-            html = html.replace('{telegram_buttons}', telegram_buttons_html)
+            # Insert button HTML into the template
+            html = html.replace('{telegram_buttons}', telegram_buttons_html)    
     else:
         html = '<h1>This is not a streamable file</h1>'
     
     return html
+
 
 
 
