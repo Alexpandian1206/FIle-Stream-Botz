@@ -16,104 +16,218 @@ import random
 async def render_page(id, secure_hash):
     # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
-    file_name, mime_type = file_data.file_name, file_data.mime_type
-    secure_hash = file_data.unique_id[:6]
-    src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
+
+    # Validate the hash
+    if file_data.unique_id[:6] != secure_hash:
+        logging.debug(f'Link hash: {secure_hash} - {file_data.unique_id[:6]}')
+        logging.debug(f"Invalid hash for message with ID {id}")
+        raise InvalidHash
+
+    # Construct source URL and file tag
+    src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Original button links
-    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
+    download_link = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
 
     # Randomize button links
-    links2 = random.sample(links2, len(links2))
+    download_link = random.sample(download_link, len(download_link))
 
-    if tag == 'video':
-        # Read and format HTML template
-        async with aiofiles.open('Adarsh/template/req.html') as r:
-            heading = 'Watch - {}'.format(file_name)
-            html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
+    # Telegram button links only
+    telegram_links = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
 
-            # Define button HTML for Telegram file download
-            telegram_buttons_html = f'''
-            <style>
-                .button-container {{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    margin-top: 20px;
-                }}
-                .button-container button {{
-                    background-color: #FFC107; /* Bootstrap warning color */
-                    color: black;
-                    font-weight: bold;
-                    text-align: center;
-                    padding: 15px;
-                    border-radius: 20px;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                    margin: 4px;
-                    width: 200px;
-                }}
-                .button-container button:hover {{
-                    background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                    transform: translateY(-5px);
-                }}
-            </style>
-            <h1>👇🏻 𝙶𝙴𝚃 𝙷𝙴𝚁𝙴 𝚃𝙴𝙻𝙴𝙶𝚁𝙰𝙼 𝙵𝙸𝙇𝙴 👇🏻</h1>
-            <div class="button-container">
-                <button onclick="window.location.href='{links2[0]}'">sᴇʀᴠᴇʀ 1</button>
-                <button onclick="window.location.href='{links2[1]}'">sᴇʀᴠᴇʀ 2</button>
-                <button onclick="window.location.href='{links2[2]}'">sᴇʀᴠᴇʀ 3</button>
-            </div>
-            '''
+    # Randomize Telegram button links
+    telegram_links = random.sample(telegram_links, len(telegram_links))
 
-            # Insert button HTML into the template
-            html = html.replace('{telegram_buttons}', telegram_buttons_html)    
-    else:
-        html = '<h1>This is not a streamable file</h1>'
-    
+    # Read and format HTML template
+    async with aiofiles.open('Adarsh/template/req.html') as r:
+        heading = 'Watch {}'.format(file_data.file_name)
+        html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src)
+
+    # Create the download button HTML
+    download_button_html = f'''
+    <style>
+        .button-container {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }}
+        .button-container button {{
+            background-color: #FFC107; /* Bootstrap warning color */
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 0; /* Margin for vertical spacing */
+            width: 200px;
+        }}
+        .button-container button:hover {{
+            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }}
+    </style>
+    <div class="button-container">
+        <button onclick="window.location.href='{download_link[0]}'">sᴇʀᴠᴇʀ 1</button>
+        <button onclick="window.location.href='{download_link[1]}'">sᴇʀᴠᴇʀ 2</button>
+        <button onclick="window.location.href='{download_link[2]}'">sᴇʀᴠᴇʀ 3</button>
+    </div>
+    '''
+
+    # Create the Telegram button HTML
+    telegram_button_html = f'''
+    <style>
+        .telegram-button-container {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }}
+        .telegram-button-container button {{
+            background-color: #FFC107; /* Bootstrap warning color */
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 8px 0;
+            width: 80%;
+            max-width: 300px;
+        }}
+        .telegram-button-container button:hover {{
+            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }}
+    </style>
+    <div class="telegram-button-container">
+        <button onclick="window.location.href='{telegram_links[0]}'">Telegram Server 1</button>
+        <button onclick="window.location.href='{telegram_links[1]}'">Telegram Server 2</button>
+        <button onclick="window.location.href='{telegram_links[2]}'">Telegram Server 3</button>
+    </div>
+    '''
+
+    # Insert the download and telegram button HTML into the template
+    html = html.replace('{download_button}', download_button_html)
+    html = html.replace('{telegram_button}', telegram_button_html)
+
     return html
 
 
 
 
+
 async def media_watch(id):
+    async def render_page(id, secure_hash):
     # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
-    file_name, mime_type = file_data.file_name, file_data.mime_type
-    secure_hash = file_data.unique_id[:6]
-    src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
+
+    # Validate the hash
+    if file_data.unique_id[:6] != secure_hash:
+        logging.debug(f'Link hash: {secure_hash} - {file_data.unique_id[:6]}')
+        logging.debug(f"Invalid hash for message with ID {id}")
+        raise InvalidHash
+
+    # Construct source URL and file tag
+    src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
     tag = file_data.mime_type.split('/')[0].strip()
 
     # Original button links
-    links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
-    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
+    download_link = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
 
     # Randomize button links
-    links1 = random.sample(links1, len(links1))
-    links2 = random.sample(links2, len(links2))
+    download_link = random.sample(download_link, len(download_link))
 
-    if tag == 'video':
-        # Read and format HTML template
-        async with aiofiles.open('Adarsh/template/req.html') as r:
-            heading = 'Watch - {}'.format(file_name)
-            html = (await r.read()).replace('tag', tag) % (heading, file_name, src)
+    # Telegram button links only
+    telegram_links = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
 
-            # Create the buttons HTML
-            download_buttons_html = ''.join(
-                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links1[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
-                for i in range(len(links1))
-            )
+    # Randomize Telegram button links
+    telegram_links = random.sample(telegram_links, len(telegram_links))
 
-            telegram_buttons_html = ''.join(
-                f'<button style="width: 100%; margin: 10px 0;" onclick="window.location.href=\'{links2[i]}\'">sᴇʀᴠᴇʀ {i + 1}</button>\n'
-                for i in range(len(links2))
-            )
+    # Read and format HTML template
+    async with aiofiles.open('Adarsh/template/req.html') as r:
+        heading = 'Watch {}'.format(file_data.file_name)
+        html = (await r.read()).replace('tag', tag) % (heading, file_data.file_name, src)
 
-            # Insert buttons HTML directly into the template
-            html = html.replace('{download_buttons}', download_buttons_html)
-            html = html.replace('{telegram_buttons}', telegram_buttons_html)
+    # Create the download button HTML
+    download_button_html = f'''
+    <style>
+        .button-container {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }}
+        .button-container button {{
+            background-color: #FFC107; /* Bootstrap warning color */
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px 0; /* Margin for vertical spacing */
+            width: 200px;
+        }}
+        .button-container button:hover {{
+            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }}
+    </style>
+    <div class="button-container">
+        <button onclick="window.location.href='{download_link[0]}'">sᴇʀᴠᴇʀ 1</button>
+        <button onclick="window.location.href='{download_link[1]}'">sᴇʀᴠᴇʀ 2</button>
+        <button onclick="window.location.href='{download_link[2]}'">sᴇʀᴠᴇʀ 3</button>
+    </div>
+    '''
+
+    # Create the Telegram button HTML
+    telegram_button_html = f'''
+    <style>
+        .telegram-button-container {{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }}
+        .telegram-button-container button {{
+            background-color: #FFC107; /* Bootstrap warning color */
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 8px 0;
+            width: 80%;
+            max-width: 300px;
+        }}
+        .telegram-button-container button:hover {{
+            background: linear-gradient(to right, #ff758c, #ff7eb3); /* gradient from pink to violet */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }}
+    </style>
+    <div class="telegram-button-container">
+        <button onclick="window.location.href='{telegram_links[0]}'">Telegram Server 1</button>
+        <button onclick="window.location.href='{telegram_links[1]}'">Telegram Server 2</button>
+        <button onclick="window.location.href='{telegram_links[2]}'">Telegram Server 3</button>
+    </div>
+    '''
+
+    # Insert the download and telegram button HTML into the template
+    html = html.replace('{download_button}', download_button_html)
+    html = html.replace('{telegram_button}', telegram_button_html)
+
     else:
         html = '<h1>This is not a streamable file</h1>'
     
