@@ -226,9 +226,6 @@ async def media_watch(id):
     # Insert the download and telegram button HTML into the template
     html = html.replace('{download_button}', download_button_html)
     html = html.replace('{telegram_button}', telegram_button_html)
-
-else:
-        html = '<h1>This is not a streamable file</h1>'
     
     return html
 
