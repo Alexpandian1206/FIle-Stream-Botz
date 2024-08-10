@@ -227,7 +227,7 @@ async def media_watch(id):
     html = html.replace('{download_button}', download_button_html)
     html = html.replace('{telegram_button}', telegram_button_html)
 
-    else:
+  else:
         html = '<h1>This is not a streamable file</h1>'
     
     return html
