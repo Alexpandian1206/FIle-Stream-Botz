@@ -124,7 +124,6 @@ async def render_page(id, secure_hash):
 
 
 async def media_watch(id):
-    async def render_page(id, secure_hash):
     # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
 
