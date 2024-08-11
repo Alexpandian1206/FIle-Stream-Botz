@@ -4,6 +4,7 @@ python-dotenv<=0.20.0
 motor 
 aiofiles
 dnspython
+jinja2
 apscheduler
 requests
 psutil
