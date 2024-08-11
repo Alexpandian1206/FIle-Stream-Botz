@@ -450,15 +450,15 @@
     </script>
 <!------- scroll --------->
 <script>
-    function startCountdown(buttonId, targetSectionId) {
-        let countdown = 10;
+    function startCountdown(buttonId, targetSectionId, finalText) {
+        let countdown = 5;
         const button = document.getElementById(buttonId);
         
         const timer = setInterval(() => {
             countdown--;
             if (countdown <= 0) {
                 clearInterval(timer);
-                button.innerText = 'Click Here';
+                button.innerText = finalText;
                 button.disabled = false;
             } else {
                 button.innerText = countdown;
@@ -471,9 +471,9 @@
         });
     }
 
-    // Start countdowns for both buttons
-    startCountdown('scrollButton1', 'targetSection1');
-    startCountdown('scrollButton2', 'targetSection2');
+    // Start countdowns for both buttons with separate names
+    startCountdown('scrollButton1', 'targetSection1', 'TELEGRAM FILE');
+    startCountdown('scrollButton2', 'targetSection2', 'DOWNLOAD FILE');
 </script>
 	
 </body>
