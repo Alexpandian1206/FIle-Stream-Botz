@@ -15,44 +15,48 @@ import random
 from jinja2 import Environment, FileSystemLoader
 
 async def render_page(id, secure_hash):
-    
 
-# Setup Jinja2 environment
-env = Environment(loader=FileSystemLoader('.'))
-template = env.get_template('req.html')
+def render_template():
+    # Setup Jinja2 environment
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template('req.html')
 
-# Data to pass into the template
-data = {
-    'title': 'Aklinksz',
-    'site_name': 'Aklinksz',
-    'home_submenu': [
-        {'id': 'welcome', 'name': 'WELCOME', 'active': True},
-        {'id': 'channels', 'name': 'CHANNELS & BOTZ', 'active': False},
-        {'id': 'talk', 'name': 'LET\'S TALK', 'active': False},
-    ],
-    'home_sections': [
-        {'id': 'welcome', 'content': 'This is the Welcome content.', 'active': True},
-        {'id': 'channels', 'content': 'This is the Channels & Botz content.', 'active': False},
-        {'id': 'talk', 'content': 'This is the Let\'s Talk content.', 'active': False},
-    ],
-    'about_submenu': [
-        {'id': 'welcomeAbout', 'name': 'WELCOME', 'active': True},
-        {'id': 'channelsAbout', 'name': 'CHANNELS & BOTZ', 'active': False},
-        {'id': 'talkAbout', 'name': 'LET\'S TALK', 'active': False},
-    ],
-    'about_sections': [
-        {'id': 'welcomeAbout', 'content': 'This is the About Welcome content.', 'active': True},
-        {'id': 'channelsAbout', 'content': 'This is the About Channels & Botz content.', 'active': False},
-        {'id': 'talkAbout', 'content': 'This is the About Let\'s Talk content.', 'active': False},
-    ]
-}
+    # Data to pass into the template
+    data = {
+        'title': 'Aklinksz',
+        'site_name': 'Aklinksz',
+        'home_submenu': [
+            {'id': 'welcome', 'name': 'WELCOME', 'active': True},
+            {'id': 'channels', 'name': 'CHANNELS & BOTZ', 'active': False},
+            {'id': 'talk', 'name': 'LET\'S TALK', 'active': False},
+        ],
+        'home_sections': [
+            {'id': 'welcome', 'content': 'This is the Welcome content.', 'active': True},
+            {'id': 'channels', 'content': 'This is the Channels & Botz content.', 'active': False},
+            {'id': 'talk', 'content': 'This is the Let\'s Talk content.', 'active': False},
+        ],
+        'about_submenu': [
+            {'id': 'welcomeAbout', 'name': 'WELCOME', 'active': True},
+            {'id': 'channelsAbout', 'name': 'CHANNELS & BOTZ', 'active': False},
+            {'id': 'talkAbout', 'name': 'LET\'S TALK', 'active': False},
+        ],
+        'about_sections': [
+            {'id': 'welcomeAbout', 'content': 'This is the About Welcome content.', 'active': True},
+            {'id': 'channelsAbout', 'content': 'This is the About Channels & Botz content.', 'active': False},
+            {'id': 'talkAbout', 'content': 'This is the About Let\'s Talk content.', 'active': False},
+        ]
+    }
 
-# Render the template with the data
-html_output = template.render(data)
+    # Render the template with the data
+    html_output = template.render(data)
 
-# Save or output the rendered HTML
-with open('output.html', 'w') as file:
-    file.write(html_output)
+    # Save or output the rendered HTML
+    with open('output.html', 'w') as file:
+        file.write(html_output)
+
+# Call the function to execute it
+render_template()
+
     
     # Get file data based on ID
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
