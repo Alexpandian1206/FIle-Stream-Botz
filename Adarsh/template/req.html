@@ -32,11 +32,19 @@
       font-family: serif;
       }
 
-      #scrollButton {
+	    .simple-button {
             padding: 10px 20px;
-            font-size: 16px;
+            background-color: transparent;
+            color: #ff0066;
+            border: #ff0066;
+            border-radius: 5px;
             cursor: pointer;
-      }
+            font-size: 16px;
+        }
+
+        .simple-button:hover {
+            background-color: #45a049;
+	}
       
     </style>
 	
@@ -185,7 +193,7 @@
 	document.write('<scr' + 'ipt type="text/javascript" src="//chesssorrydescend.com/d2b3b2f306394345d209da23e5399c4e/invoke.js"></scr' + 'ipt>');
 		</script>
 
-	<button id="scrollButton" onclick="scrollToSection()">5</button>
+	<button id="scrollButton" class="simple-button">5</button>
 	
 
 <!-- External video player section -->
@@ -443,7 +451,7 @@
     </script>
 <!------- scroll --------->
 <script>
-    let countdown = 5;
+    let countdown = 10;
     const button = document.getElementById('scrollButton');
     
     const timer = setInterval(() => {
@@ -451,7 +459,7 @@
         if (countdown <= 0) {
             clearInterval(timer);
             button.innerText = 'Click Here';
-            button.style.display = 'block'; // Show button
+            button.disabled = false;
         } else {
             button.innerText = countdown;
         }
@@ -460,6 +468,9 @@
     function scrollToSection() {
         document.getElementById('targetSection').scrollIntoView({ behavior: 'smooth' });
     }
+
+    button.disabled = false; // Disable the button during the countdown
+    button.addEventListener('click', scrollToSection); // Add the click event listener
 </script>
 	
 </body>
