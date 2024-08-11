@@ -32,254 +32,54 @@
       font-family: serif;
       }
       
-    </style>
-	
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aklinksz</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Header Styles */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background: red;
-            position: relative;
-        }
-
-        .logo {
-            width: 150px;
-        }
-
-        .logo img {
-            width: 100%;
-            height: auto;
-        }
-
-        .title {
-            font-size: 24px;
-            font-weight: bold;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .menu {
-            display: flex;
-            gap: 20px;
-            position: relative;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: black;
-            font-size: 18px;
-            padding: 5px 10px;
-            position: relative;
-            cursor: pointer;
-            text-transform: uppercase; /* Capitalize menu items */
-        }
-
-        .menu a.active::after {
-            content: '';
-            display: block;
-            height: 2px;
-            background-color: #ff0066; /* Updated underline color */
-            width: 100%;
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-        }
-
-        .menu a:hover {
-            color: #cc0099;
-        }
-
-        /* Content Styles */
         .content {
-            padding: 20px;
-        }
-
-        .section {
             display: none;
         }
 
-        .section.active {
-            display: block;
-        }
-
-        /* Submenu Styles */
-        .submenu {
-            display: none; /* Hide the submenu by default */
-            background: transparent; /* Set background to transparent */
-            padding: 0; /* Remove padding to remove the background bar */
-            border-radius: 4px;
-            text-transform: uppercase; /* Capitalize submenu items */
-            position: relative; /* Position relative for positioning below heading */
-        }
-
-        .submenu a {
-            display: inline-block; /* Display submenu items inline */
-            padding: 10px;
-            color: #333; /* Default text color */
-            text-decoration: none;
-            white-space: nowrap; /* Prevent text from wrapping */
-            border-radius: 4px; /* Rounded corners */
-            transition: background-color 0.3s ease, color 0.3s ease, border-bottom 0.3s ease; /* Smooth transitions */
-            position: relative; /* Position relative for the underline */
-        }
-
-        .submenu a:hover {
-            background-color: #f0f0f0; /* Light background color on hover */
-            color: #ff0066; /* Text color on hover */
-        }
-
-        .submenu a.active {
-            color: #333; /* Text color for active item */
-        }
-
-        .submenu a.active::after {
-            content: '';
-            display: block;
-            height: 2px;
-            background-color: #ff0066; /* Underline color for active submenu item */
-            width: 100%;
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-        }
-
-        /* Show submenu within active section */
-        .section.active .submenu {
+        .active {
             display: block;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <!-- Logo -->
-        <div class="logo">
-            <img src="https://your-image-url.com/logo.png" alt="Logo">
-        </div>
+    <header>
+        <nav class="navbar p-lg-4 p-2" style="background-color: rgb(31, 57, 106);">
+            <div class="d-flex ">
+                <button onclick="showContent('home')" class="btn">Home</button>
+                <button onclick="showContent('about')" class="btn">About</button>
+            </div>
+        </nav>
+    </header>
 
-        <!-- Title -->
-        <div class="title">
-            Aklinksz
-        </div>
-
-        <!-- Menu Bar -->
-        <div class="menu">
-            <a onclick="showSection('home')" id="homeLink" class="active">Home</a>
-            <a onclick="showSection('about')" id="aboutLink">About</a>
-        </div>
+    <div id="home" class="content active">
+        <h1>Home Content</h1>
+        <p>Welcome to the home page!</p>
     </div>
 
-    <!-- Content Sections -->
-    <div class="content">
-        <div id="home" class="section active">
-            <h2>Welcome to Aklinksz</h2>
-            <div class="submenu">
-                <a href="#" onclick="showSubSection('telegram')" id="telegramLink" class="active">Telegram File</a>
-                <a href="#" onclick="showSubSection('download')" id="downloadLink">Download File</a>
-                <a href="#" onclick="showSubSection('streaming')" id="streamingLink">Streaming</a>
-            </div>
-            <!-- Subsections for Home -->
-            <div id="telegram" class="section active">
-                <h3>Telegram File</h3>
-                <p>Content related to Telegram files.</p>
-		   <div> {telegram_button} </div>
-            </div>
-            <div id="download" class="section">
-                <h3>Download File</h3>
-                <p>Content related to file downloads.</p>
-		    <div> {download_button} </div>
-            </div>
-            <div id="streaming" class="section">
-                <h3>Streaming</h3>
-                <p>Content related to streaming.</p>
-            </div>
-        </div>
-        <div id="about" class="section">
-            <h2>About Aklinksz</h2>
-            <div class="submenu">
-                <a href="#" onclick="showSubSection('welcomeAbout')" id="welcomeAboutLink" class="active">Welcome</a>
-                <a href="#" onclick="showSubSection('channels')" id="channelsLink">Channels & Botz</a>
-                <a href="#" onclick="showSubSection('letsTalk')" id="letsTalkLink">Let's Talk</a>
-            </div>
-            <!-- Subsections for About -->
-            <div id="welcomeAbout" class="section active">
-                <h3>Welcome</h3>
-                <p>Content related to Welcome.</p>
-            </div>
-            <div id="channels" class="section">
-                <h3>Channels & Botz</h3>
-                <p>Content related to Channels & Botz.</p>
-            </div>
-            <div id="letsTalk" class="section">
-                <h3>Let's Talk</h3>
-                <p>Content related to Let's Talk.</p>
-            </div>
-        </div>
+    <div id="about" class="content">
+        <h1>About Content</h1>
+        <p>Learn more about us on this page.</p>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set default section and submenu item for the Home section
-            showSection('home');
-            showSubSection('telegram'); // Ensure default submenu is active
+        function showContent(menu) {
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            document.getElementById(menu).classList.add('active');
+        }
+
+        // Show default content based on the current URL hash
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            showContent(hash);
         });
 
-        function showSection(sectionId) {
-            // Remove active class from all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Remove active class from all menu links
-            document.querySelectorAll('.menu a').forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Show the selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Add active class to the corresponding menu link
-            document.getElementById(sectionId + 'Link').classList.add('active');
-
-            // Ensure the submenu is displayed and set the default submenu item
-            const submenu = document.querySelector(`#${sectionId} .submenu`);
-            if (submenu) {
-                submenu.style.display = 'block';
-                const defaultSubSectionId = sectionId === 'home' ? 'telegram' : 'welcomeAbout';
-                showSubSection(defaultSubSectionId);
-            }
-        }
-
-        function showSubSection(subSectionId) {
-            // Hide all subsections within the current active section
-            document.querySelectorAll(`#${document.querySelector('.section.active').id} .section`).forEach(section => {
-                section.classList.remove('active');
-            });
-
-            // Show the selected subsection
-            document.getElementById(subSectionId).classList.add('active');
-
-            // Update submenu item active state
-            document.querySelectorAll(`#${document.querySelector('.section.active').id} .submenu a`).forEach(link => {
-                link.classList.remove('active');
-            });
-            document.getElementById(subSectionId + 'Link').classList.add('active');
-        }
+        // Update content when the URL hash changes
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            showContent(hash);
+        });
     </script>
-
-	
 </body>
 </html>
