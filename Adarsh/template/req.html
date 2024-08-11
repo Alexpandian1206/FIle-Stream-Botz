@@ -39,7 +39,8 @@
             border-radius: 8px; /* Adjusted border-radius for a smoother curve */
             cursor: pointer;
             font-size: 18px; /* Increased font size */
-        }
+            margin: 10px; /* Add some space between buttons */
+	    }
     
     </style>
 	
@@ -188,7 +189,9 @@
 	document.write('<scr' + 'ipt type="text/javascript" src="//chesssorrydescend.com/d2b3b2f306394345d209da23e5399c4e/invoke.js"></scr' + 'ipt>');
 		</script>
 
-	<button id="scrollButton" class="simple-button">5</button>
+	<button id="scrollButton1" class="simple-button">5</button>
+<button id="scrollButton2" class="simple-button">5</button>
+
 	
 
 <!-- External video player section -->
@@ -242,7 +245,9 @@
             </div>
 <br>
 	<!----ads----->
-			
+			<div id="targetSection2">
+	       {download_button}
+			</div>
 
 	<br>
                 <!-----------------Warnning and Reports----------------------->
@@ -267,10 +272,9 @@
                        <script async="async" data-cfasync="false" src="//chesssorrydescend.com/7d10ca54b35d2feec9f360204fe2bad9/invoke.js"></script>
 <div id="container-7d10ca54b35d2feec9f360204fe2bad9"></div>
 
-       <div id="targetSection">
+       <div id="targetSection1">
     {telegram_button}
-	       <br>
-	       {download_button}
+	     
 </div>
 	
 	<br>
@@ -446,26 +450,30 @@
     </script>
 <!------- scroll --------->
 <script>
-    let countdown = 10;
-    const button = document.getElementById('scrollButton');
-    
-    const timer = setInterval(() => {
-        countdown--;
-        if (countdown <= 0) {
-            clearInterval(timer);
-            button.innerText = 'Click Here';
-            button.disabled = false;
-        } else {
-            button.innerText = countdown;
-        }
-    }, 1000);
+    function startCountdown(buttonId, targetSectionId) {
+        let countdown = 10;
+        const button = document.getElementById(buttonId);
+        
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdown <= 0) {
+                clearInterval(timer);
+                button.innerText = 'Click Here';
+                button.disabled = false;
+            } else {
+                button.innerText = countdown;
+            }
+        }, 1000);
 
-    function scrollToSection() {
-        document.getElementById('targetSection').scrollIntoView({ behavior: 'smooth' });
+        button.disabled = true; // Disable the button during the countdown
+        button.addEventListener('click', () => {
+            document.getElementById(targetSectionId).scrollIntoView({ behavior: 'smooth' });
+        });
     }
 
-    button.disabled = false; // Disable the button during the countdown
-    button.addEventListener('click', scrollToSection); // Add the click event listener
+    // Start countdowns for both buttons
+    startCountdown('scrollButton1', 'targetSection1');
+    startCountdown('scrollButton2', 'targetSection2');
 </script>
 	
 </body>
