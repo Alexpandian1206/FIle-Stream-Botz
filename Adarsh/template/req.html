@@ -1,85 +1,141 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="6a97888e-site-verification" content="729422ebb758dbf8a073d7507db36284">
     <meta charset="UTF-8">
-    <link rel="icon" href="https://telegra.ph/file/52fffcb823c38abe02cca.jpg" type="image/x-icon">
-    <meta property="og:image" content="https://telegra.ph/file/52fffcb823c38abe02cca.jpg" itemprop="thumbnailUrl">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="monetag" content="035a24fd1e38c50abc09f732408e9287">
-    <title>%s</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>    
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type='text/css' href="https://drive----google.com/uc?export=view&id=1pVLG4gZy7jdow3sO-wFS06aP_A9QX0O6">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Delius">
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.tailwindcss.com"></script>    
-    
+    <title>Menu with Submenu Example</title>
     <style>
-      marquee{
-      font-size: 20px;
-      font-weight: 800;
-      color: white;
-      text-shadow: 2px 2px 2px black, 0 0 25px rgb(48, 146, 98), 0 0 5px darkgreen;
-      font-family: serif;
-      }
-      
-        .content {
-            display: none;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-
-        .active {
-            display: block;
+        .navbar {
+            background-color: rgb(31, 57, 106);
+            padding: 10px;
+            color: white;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #ff0066;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .submenu-container {
+            margin-top: 20px;
+        }
+        .submenu a {
+            color: black;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+        }
+        .submenu a.active {
+            border-bottom: 2px solid #ff0066;
+        }
+        .submenu a:hover {
+            border-bottom: 2px solid #ff0066;
         }
     </style>
 </head>
 <body>
+
     <header>
-        <nav class="navbar p-lg-4 p-2" style="background-color: rgb(31, 57, 106);">
-            <div class="d-flex ">
-                <button onclick="showContent('home')" class="btn">Home</button>
-                <button onclick="showContent('about')" class="btn">About</button>
-            </div>
-        </nav>
+        <div class="navbar">
+            <a href="#" onclick="showContent('home')">HOME</a>
+            <a href="#" onclick="showContent('about')">ABOUT</a>
+        </div>
     </header>
 
-    <div id="home" class="content active">
-        <h1>Home Content</h1>
-        <p>Welcome to the home page!</p>
+    <div id="home" class="content">
+        <h1>Welcome to Aklinksz</h1>
+        <div class="submenu-container">
+            <div class="submenu">
+                <a href="#" onclick="showSubContent('welcome')" id="default-submenu">WELCOME</a>
+                <a href="#" onclick="showSubContent('channels')">CHANNELS & BOTZ</a>
+                <a href="#" onclick="showSubContent('talk')">LET'S TALK</a>
+            </div>
+        </div>
+        <div id="welcome" class="subcontent">
+            <p>This is the Welcome content.</p>
+        </div>
+        <div id="channels" class="subcontent" style="display:none;">
+            <p>This is the Channels & Botz content.</p>
+        </div>
+        <div id="talk" class="subcontent" style="display:none;">
+            <p>This is the Let's Talk content.</p>
+        </div>
     </div>
 
-    <div id="about" class="content">
-        <h1>About Content</h1>
-        <p>Learn more about us on this page.</p>
+    <div id="about" class="content" style="display:none;">
+        <h1>About Aklinksz</h1>
+        <div class="submenu-container">
+            <div class="submenu">
+                <a href="#" onclick="showSubContent('welcomeAbout')" id="default-submenu-about">WELCOME</a>
+                <a href="#" onclick="showSubContent('channelsAbout')">CHANNELS & BOTZ</a>
+                <a href="#" onclick="showSubContent('talkAbout')">LET'S TALK</a>
+            </div>
+        </div>
+        <div id="welcomeAbout" class="subcontent">
+            <p>This is the About Welcome content.</p>
+        </div>
+        <div id="channelsAbout" class="subcontent" style="display:none;">
+            <p>This is the About Channels & Botz content.</p>
+        </div>
+        <div id="talkAbout" class="subcontent" style="display:none;">
+            <p>This is the About Let's Talk content.</p>
+        </div>
     </div>
 
     <script>
-        function showContent(menu) {
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => content.classList.remove('active'));
+        function showContent(contentId) {
+            // Hide all content divs
+            document.querySelectorAll('.content').forEach(function(div) {
+                div.style.display = 'none';
+            });
 
-            document.getElementById(menu).classList.add('active');
+            // Show the selected content div
+            document.getElementById(contentId).style.display = 'block';
+
+            // Reset submenu
+            if(contentId === 'home') {
+                showSubContent('welcome');
+            } else if(contentId === 'about') {
+                showSubContent('welcomeAbout');
+            }
         }
 
-        // Show default content based on the current URL hash
-        window.addEventListener('load', () => {
-            const hash = window.location.hash.replace('#', '') || 'home';
-            showContent(hash);
-        });
+        function showSubContent(subContentId) {
+            // Hide all subcontent divs
+            document.querySelectorAll('.subcontent').forEach(function(div) {
+                div.style.display = 'none';
+            });
 
-        // Update content when the URL hash changes
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.replace('#', '');
-            showContent(hash);
-        });
+            // Show the selected subcontent div
+            document.getElementById(subContentId).style.display = 'block';
+
+            // Remove active class from all submenu links
+            document.querySelectorAll('.submenu a').forEach(function(link) {
+                link.classList.remove('active');
+            });
+
+            // Add active class to the selected submenu link
+            event.target.classList.add('active');
+        }
+
+        // Set default menu and submenu on page load
+        window.onload = function() {
+            showContent('home');
+        }
     </script>
 </body>
 </html>
