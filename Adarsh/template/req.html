@@ -31,6 +31,13 @@
       text-shadow: 2px 2px 2px black, 0 0 25px rgb(48, 146, 98), 0 0 5px darkgreen;
       font-family: serif;
       }
+
+      #scrollButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none; /* Hide initially */
+      }
       
     </style>
 	
@@ -179,6 +186,11 @@
 	document.write('<scr' + 'ipt type="text/javascript" src="//chesssorrydescend.com/d2b3b2f306394345d209da23e5399c4e/invoke.js"></scr' + 'ipt>');
 		</script>
 
+	<button id="scrollButton" onclick="scrollToSection()">5</button>
+
+<div style="height: 1000px;"></div>
+	
+
 <!-- External video player section -->
             <div class="justify-content-center align-items-center w-100 d-flex">
                     <div class="row d-flex w-100 justify-content-center align-items-center">
@@ -254,7 +266,13 @@
 	<!----ads----->
                        <script async="async" data-cfasync="false" src="//chesssorrydescend.com/7d10ca54b35d2feec9f360204fe2bad9/invoke.js"></script>
 <div id="container-7d10ca54b35d2feec9f360204fe2bad9"></div>
-			
+
+       <div id="targetSection">
+    {telegram_button}
+	       <br>
+	       {download_button}
+</div>
+	
 	<br>
     <footer>
             <!-------------------Copyrights---------------------------->
@@ -426,8 +444,26 @@
 
 	
     </script>
-<!------- Popunder --------->
+<!------- scroll --------->
+<script>
+    let countdown = 5;
+    const button = document.getElementById('scrollButton');
+    
+    const timer = setInterval(() => {
+        countdown--;
+        if (countdown <= 0) {
+            clearInterval(timer);
+            button.innerText = 'Click Here';
+            button.style.display = 'block'; // Show button
+        } else {
+            button.innerText = countdown;
+        }
+    }, 1000);
 
+    function scrollToSection() {
+        document.getElementById('targetSection').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
 	
 </body>
 </html>
