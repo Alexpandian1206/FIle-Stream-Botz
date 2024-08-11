@@ -3,106 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aklinksz</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{{ title }}</title>
     <style>
-        .active {
-            color: #ff0066;
-            border-bottom: 2px solid #ff0066;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        .submenu {
-            display: flex;
-            justify-content: center;
+        .navbar {
+            background-color: rgb(31, 57, 106);
             padding: 10px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 5px;
+            color: white;
+            text-align: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #ff0066;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .submenu-container {
+            margin-top: 20px;
         }
         .submenu a {
-            margin: 0 10px;
             color: black;
             text-decoration: none;
-            font-weight: bold;
+            padding: 10px 15px;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
         }
         .submenu a.active {
             border-bottom: 2px solid #ff0066;
         }
-        .content {
-            padding: 20px;
+        .submenu a:hover {
+            border-bottom: 2px solid #ff0066;
         }
     </style>
 </head>
 <body>
-    <header class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right, #cc0099 0%, #ffffff 100%);">
-        <div class="container">
-            <a class="navbar-brand" href="#">Aklinksz</a>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="home-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="about-link">About</a>
-                </li>
-            </ul>
+    <header>
+        <div class="navbar">
+            <a href="#" onclick="showContent('home')">HOME</a>
+            <a href="#" onclick="showContent('about')">ABOUT</a>
         </div>
     </header>
-
-    <div class="container content">
-        <div id="submenu-container" class="submenu"></div>
-        <div id="content">
-            <h2>Welcome to Aklinksz</h2>
-            <p>Select a menu item to see the content.</p>
+    <div id="home" class="content">
+        <h1>Welcome to {{ site_name }}</h1>
+        <div class="submenu-container">
+            <div class="submenu">
+                {% for link in home_submenu %}
+                    <a href="#" onclick="showSubContent('{{ link.id }}')" class="{{ 'active' if link.active else '' }}">{{ link.name }}</a>
+                {% endfor %}
+            </div>
         </div>
+        {% for section in home_sections %}
+            <div id="{{ section.id }}" class="subcontent" style="display: {{ 'block' if section.active else 'none' }};">
+                <p>{{ section.content }}</p>
+            </div>
+        {% endfor %}
     </div>
-
+    <div id="about" class="content" style="display:none;">
+        <h1>About {{ site_name }}</h1>
+        <div class="submenu-container">
+            <div class="submenu">
+                {% for link in about_submenu %}
+                    <a href="#" onclick="showSubContent('{{ link.id }}')" class="{{ 'active' if link.active else '' }}">{{ link.name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        {% for section in about_sections %}
+            <div id="{{ section.id }}" class="subcontent" style="display: {{ 'block' if section.active else 'none' }};">
+                <p>{{ section.content }}</p>
+            </div>
+        {% endfor %}
+    </div>
     <script>
-        const contentMap = {
-            home: {
-                telegram: '<h2>Telegram File</h2><p>Content related to Telegram files.</p>',
-                download: '<h2>Download Files</h2><p>Content related to download files.</p>',
-                streaming: '<h2>Streaming</h2><p>Content related to streaming.</p>'
-            },
-            about: {
-                welcome: '<h2>Welcome to Aklinksz</h2><p>Content about the website.</p>',
-                channels: '<h2>Channels & Botz</h2><p>Information about channels and bots.</p>',
-                talk: '<h2>Let\'s Talk</h2><p>Details on how to get in touch.</p>'
+        function showContent(contentId) {
+            document.querySelectorAll('.content').forEach(function(div) {
+                div.style.display = 'none';
+            });
+            document.getElementById(contentId).style.display = 'block';
+            // Adjust submenu display
+            if (contentId === 'home') {
+                showSubContent('welcome');
+            } else if (contentId === 'about') {
+                showSubContent('welcomeAbout');
             }
-        };
-
-        function updatePage(menu, submenu) {
-            const submenuContainer = document.getElementById('submenu-container');
-            const contentDiv = document.getElementById('content');
-
-            // Set active link
-            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
-            document.getElementById(`${menu}-link`).classList.add('active');
-
-            // Set submenu
-            let submenuHtml = '';
-            if (menu === 'home') {
-                submenuHtml = `
-                    <a href="#" class="${submenu === 'telegram' ? 'active' : ''}" onclick="updatePage('home', 'telegram')">TELEGRAM FILE</a>
-                    <a href="#" class="${submenu === 'download' ? 'active' : ''}" onclick="updatePage('home', 'download')">DOWNLOAD FILE</a>
-                    <a href="#" class="${submenu === 'streaming' ? 'active' : ''}" onclick="updatePage('home', 'streaming')">STREAMING</a>
-                `;
-            } else if (menu === 'about') {
-                submenuHtml = `
-                    <a href="#" class="${submenu === 'welcome' ? 'active' : ''}" onclick="updatePage('about', 'welcome')">WELCOME</a>
-                    <a href="#" class="${submenu === 'channels' ? 'active' : ''}" onclick="updatePage('about', 'channels')">CHANNELS & BOTZ</a>
-                    <a href="#" class="${submenu === 'talk' ? 'active' : ''}" onclick="updatePage('about', 'talk')">LET'S TALK</a>
-                `;
-            }
-            submenuContainer.innerHTML = submenuHtml;
-
-            // Set content
-            contentDiv.innerHTML = contentMap[menu][submenu] || '<p>Content not available.</p>';
         }
 
-        // Initialize page with default values
-        updatePage('home', 'telegram');
+        function showSubContent(subContentId) {
+            document.querySelectorAll('.subcontent').forEach(function(div) {
+                div.style.display = 'none';
+            });
+            document.getElementById(subContentId).style.display = 'block';
+            document.querySelectorAll('.submenu a').forEach(function(link) {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
 
-        // Add event listeners to update content on link clicks
-        document.getElementById('home-link').addEventListener('click', () => updatePage('home', 'telegram'));
-        document.getElementById('about-link').addEventListener('click', () => updatePage('about', 'welcome'));
+        window.onload = function() {
+            showContent('home');
+        }
     </script>
 </body>
 </html>
