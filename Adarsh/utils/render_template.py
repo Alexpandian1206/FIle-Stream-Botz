@@ -129,10 +129,10 @@ async def media_watch(id):
     file_data = await get_file_ids(StreamBot, int(Var.BIN_CHANNEL), int(id))
 
     # Validate the hash
-    if file_data.unique_id[:6] != secure_hash:
-        logging.debug(f'Link hash: {secure_hash} - {file_data.unique_id[:6]}')
-        logging.debug(f"Invalid hash for message with ID {id}")
-        raise InvalidHash
+    file_name, mime_type = file_data.file_name, file_data.mime_type
+    secure_hash = file_data.unique_id[:6]
+    src = urllib.parse.urljoin(Var.URL, f'{str(id)}')
+    tag = file_data.mime_type.split('/')[0].strip()
 
     # Construct source URL and file tag
     src = urllib.parse.urljoin(Var.URL, f'{secure_hash}{str(id)}')
