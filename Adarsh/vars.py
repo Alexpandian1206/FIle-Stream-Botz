@@ -49,4 +49,4 @@ class Var(object):
 
 #ADS LINK
     ADS_LINK_1 = "https://glorganoth.com/4/7536317"
-    ADS_LINK_2 = "https://glodretsa.net/4/7697132"
+    ADS_LINK_2 = "https://wwp.aistiw.com/redirect-zone/8e0d4ebe"
