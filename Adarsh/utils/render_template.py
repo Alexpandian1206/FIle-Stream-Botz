@@ -73,9 +73,9 @@ async def render_page(id, secure_hash):
         }}
     </style>
     <div class="button-container">
-        <button onclick="window.location.href='{download_link[0]}'">sᴇʀᴠᴇʀ 1</button>
-        <button onclick="window.location.href='{download_link[1]}'">sᴇʀᴠᴇʀ 2</button>
-        <button onclick="window.location.href='{download_link[2]}'">sᴇʀᴠᴇʀ 3</button>
+        <button onclick="window.location.href='{download_link[0]}'">Download sᴇʀᴠᴇʀ 1</button>
+        <button onclick="window.location.href='{download_link[1]}'">Download sᴇʀᴠᴇʀ 2</button>
+        <button onclick="window.location.href='{download_link[2]}'">Download sᴇʀᴠᴇʀ 3</button>
     </div>
     '''
 
