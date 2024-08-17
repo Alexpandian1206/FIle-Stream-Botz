@@ -33,6 +33,9 @@
       }
       
     </style>
+
+	<link rel="stylesheet" href="Ads Popup/style.css"> <!-- Link to your CSS file -->
+	
 	
 <!---------- Ads ---------->
  <!----popads-->
@@ -425,7 +428,18 @@
 	
     </script>
 <!------- Popunder --------->
+<!-- Include the ad popup via iframe -->
+    <iframe src="Ads Popup/ad-popup.html" style="width:100%; height:100vh; border:none;" onload="autoClosePopup(this)"></iframe>
 
+    <script src="Ads Popup/popup.js"></script>
+    <script>
+        // Function to automatically close the popup after 5 seconds
+        function autoClosePopup(iframe) {
+            setTimeout(function() {
+                iframe.style.display = 'none';
+            }, 5000); // 5 seconds
+        }
+    </script>
 	
 </body>
 </html>
