@@ -29,7 +29,7 @@ async def render_page(id, secure_hash):
 
     # Original button links
     links1 = [f'{Var.ADS_LINK_1}', f'{src}', f'{Var.ADS_LINK_2}']
-    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{Var.SECOND_BOTUSERNAME}?start=file_{id}']
+    links2 = [f'{Var.ADS_LINK_1}', f'{Var.ADS_LINK_2}', f'https://telegram.me/{{bot_user_name}}?start=file_{{file_id}}']
 
     # Randomize button links
     links1 = random.sample(links1, len(links1))
